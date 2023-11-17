@@ -1,2 +1,22 @@
 # TowerHanoiGame
-TowerHanoiGame-
+TowerHanoiGame-class assignment
+The 3 possible types of moves can be considered as 3 cases, with each more difficult than the last. We transform a more difficult case into an easier case until we are at case 1, at which point we simply move the disk to the desired location.
+
+Case 1: disk x-1 is behind disk x or after the position.
+Solution: trivially, move disk x to the position.
+... (x-1) _ _ _ (x) _ p ...
+... (x-1) _ _ _ _ _ (p x) ...
+
+Case 2: disk x-1 is on top of or between disk x and the position, AND there is at least one space behind disk x (we call this position "prev").
+Solution: call the recursive move(x-1, prev) (implying we also move all smaller disks) behind x, then follow Case 1.
+... _ (x) _ _ (x-1) _ p ...
+... (x-1) (x) _ _ _ _ p ... -> (x-1) is not between x and p, we can now follow Case 1.
+... (x-1) _ _ _ _ _ (p x) ...
+
+Cast 3: disk x-1 is on top of or between disk x and the position, BUT there is no space behind x.
+Solution: Move x-1 to p. Move x forward one space, then follow Case 2.
+[ (x) _ _ _ (x-1) _ p ...
+[ (x) _ _ _ _ _ (p x-1) ...
+[ _ (x) _ _ _ _ (p x-1)... -> Space created, we can now follow Case 2
+[ (x-1) (x) _ _ _ _ _ p ... -> (x-1) is not between x and p, we can now follow Case 1.
+[ (x-1) _ _ _ _ _ _ (p x) ... 
